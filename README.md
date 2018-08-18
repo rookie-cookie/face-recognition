@@ -1,3 +1,14 @@
+# Simple Face Recognition App 
+
+```
+Clone this repo
+run npm init
+run node app.js
+Go to http://localhost:3000
+```
+
+![alt text](https://github.com/rookie-cookie/face-recognition/blob/master/screenshot.png) 
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
