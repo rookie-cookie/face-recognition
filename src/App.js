@@ -65,8 +65,8 @@ class App extends Component {
 
   //event listerners with states
 
-  onRouteChange = () => {
-    this.setState ({route: 'home'});
+  onRouteChange = (route) => {
+    this.setState ({route: route});
   }
 
   onInputChange = (event) => {
@@ -91,7 +91,7 @@ class App extends Component {
           params={particlesOptions}
         />
 
-        <Navigation />
+        <Navigation onRouteChange={this.onRouteChange} />
         
         {/* if statement if signed in or not */ }
         
