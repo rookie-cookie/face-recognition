@@ -5,6 +5,8 @@ import Rank from './components/Rank/Rank.js'
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm.js'
 import FaceRecognition from  './components/FaceRecognition/FaceRecognition.js'
 import SignIn from './components/SignIn/SignIn.js'
+import Register from './components/Register/Register.js'
+
 import './App.css';
 import Particles from 'react-particles-js';
 import Clarifai from 'clarifai';
@@ -95,9 +97,8 @@ class App extends Component {
         
         {/* if statement if signed in or not */ }
         
-        { this.state.route === 'signin' 
-        ? <SignIn onRouteChange={this.onRouteChange}/> 
-        : <div> 
+        { this.state.route === 'home' 
+        ? <div> 
             <Logo /> 
             <Rank />           
             <ImageLinkForm 
@@ -112,6 +113,15 @@ class App extends Component {
             }
             <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl}/> 
           </div>
+
+        : (
+
+          this.state.route === 'signin' 
+
+          ? <SignIn onRouteChange={this.onRouteChange}/> 
+
+          : <Register onRouteChange={this.onRouteChange}/> 
+        )
         }
       </div>
     );
