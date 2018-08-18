@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Navigation from './components/Navigation/Navigation.js'
 import Logo from './components/Logo/Logo.js'
+import Rank from './components/Rank/Rank.js'
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm.js'
 import FaceRecognition from  './components/FaceRecognition/FaceRecognition.js'
-import Rank from './components/Rank/Rank.js'
+import SignIn from './components/SignIn/SignIn.js'
 import './App.css';
 import Particles from 'react-particles-js';
 import Clarifai from 'clarifai';
@@ -35,7 +36,8 @@ class App extends Component {
     this.state = {
       input: '',
       imageUrl: '', 
-      box: {}
+      box: {},
+      route: 'signin'
     }
   }
   
@@ -62,13 +64,18 @@ class App extends Component {
   }
 
   //event listerners with states
+
+  onRouteChange = () => {
+    this.setState ({route: 'home'});
+  }
+
   onInputChange = (event) => {
     this.setState({input: event.target.value});
   }
   onButtonSubmit = () => {
     //then pass this on to the facerecognition
     this.setState ({imageUrl: this.state.input});
-    
+
   // CLARIFAI API 
   app.models.predict(
     Clarifai.FACE_DETECT_MODEL, 
@@ -85,23 +92,27 @@ class App extends Component {
         />
 
         <Navigation />
-        <Logo />
-        <Rank />
         
-        <ImageLinkForm 
-          onInputChange={this.onInputChange} 
-          onButtonSubmit={this.onButtonSubmit}
-        />     
-        { 
-        /*add face recognition function using Clarifai Face Recognition API 
-          display the image under the form
-          display face box
-        */
+        {/* if statement if signed in or not */ }
+        
+        { this.state.route === 'signin' 
+        ? <SignIn onRouteChange={this.onRouteChange}/> 
+        : <div> 
+            <Logo /> 
+            <Rank />           
+            <ImageLinkForm 
+              onInputChange={this.onInputChange} 
+              onButtonSubmit={this.onButtonSubmit}
+            />     
+            { 
+            /*add face recognition function using Clarifai Face Recognition API 
+              display the image under the form
+              display face box
+            */
+            }
+            <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl}/> 
+          </div>
         }
-
-        <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl}/>
-        
-        
       </div>
     );
   }
