@@ -3,7 +3,7 @@
 ```
 Clone this repo
 run npm init
-run node app.js
+run npm start
 Go to http://localhost:3000
 ```
 
